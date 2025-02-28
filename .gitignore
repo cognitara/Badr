@@ -1,0 +1,24 @@
+# Badr AI Receptionist Public Repository .gitignore
+
+# Logs
+*.log
+
+# Environment files
+.env
+.env.example
+.venv
+venv/
+ENV/
+env/
+
+# IDE files
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
