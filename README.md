@@ -1,12 +1,16 @@
-Badr AI Receptionist
+# <h1 align="center">Badr AI Receptionist</h1>
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/3e7a0ad3-d860-4d55-9866-28d4739c3089" width="500"/>
+</p>
+
 
 > "From diagnosing patients to greeting visitors—Badr’s career change is proof that even robots can have a midlife crisis."
 
 
-
 Badr is a repurposed medical simulation robot that has traded its stethoscope for a front desk. Once a high-tech medical training tool, Badr has now embraced a new mission—acting as an AI-powered receptionist that welcomes guests, manages schedules, and keeps things running smoothly.
 
-Overview
+## Overview
 
 This public repository contains high-level documentation and architectural insights into the Badr AI Receptionist project. While the inner workings are fascinating, the actual implementation code is not included in this public repository.
 
@@ -77,7 +81,7 @@ Directory Structure
 /scripts – Utility scripts
 
 
-Key Components
+## Key Components
 
 State Machine – Manages conversation flow and system states.
 
@@ -94,12 +98,12 @@ NLP Engine – Processes text to understand intent and generate responses.
 Email Service – Sends notifications and alerts.
 
 
-License
+## License
 
 This project is licensed under a Proprietary License – see the LICENSE file for details.
 Commercial use, reselling, or redistribution is strictly prohibited without explicit permission and royalty agreements.
 
-Contact
+## Contact
 
 For inquiries, licensing, or partnerships, please reach out:
 📧 Email: info.cognitara@gmail.com
