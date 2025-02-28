@@ -1,71 +1,112 @@
-# Badr AI Receptionist
+Badr AI Receptionist
 
-Badr is an Artificial Intelligent repurposed medical simulation robot to act as receptionist after retiring his medical journey.
+> "From diagnosing patients to greeting visitors—Badr’s career change is proof that even robots can have a midlife crisis."
 
-An AI-driven virtual receptionist designed to automate front-desk interactions in a medical learning institute. The system handles incoming inquiries, schedules appointments, provides quick responses to FAQs, and integrates with existing business tools to streamline daily operations.
 
-## Overview
 
-This public repository contains high-level documentation and architecture information for the Badr AI Receptionist project. The actual implementation code is not included in this public repository.
+Badr is a repurposed medical simulation robot that has traded its stethoscope for a front desk. Once a high-tech medical training tool, Badr has now embraced a new mission—acting as an AI-powered receptionist that welcomes guests, manages schedules, and keeps things running smoothly.
 
-## Features
+Overview
 
-- **Motion Detection**: Uses PIR sensor to detect presence and activate the system
-- **Face Recognition**: Identifies team members and regular visitors
-- **Voice Interaction**: Supports both English and Arabic (including Emirati dialect)
-- **Natural Language Processing**: Understands intent and generates appropriate responses
-- **Appointment Scheduling**: Manages meeting requests and notifies team members
-- **Email Notifications**: Sends alerts for various events and system status
-- **Modular Architecture**: Easy to extend and customize
+This public repository contains high-level documentation and architectural insights into the Badr AI Receptionist project. While the inner workings are fascinating, the actual implementation code is not included in this public repository.
 
-## Hardware Requirements
+Features
 
-- Raspberry Pi 4B
-- Raspberry Pi module 3 noir camera
-- USB PnP Audio Device (microphone and speaker)
-- PIR Sensor (connected to GPIO 27)
+Motion Detection – Knows when someone arrives (no need to wave awkwardly).
 
-## System Architecture
+Face Recognition – Identifies team members and frequent visitors (and remembers them better than most humans).
 
-### Directory Structure
+Voice Interaction – Supports both English and Arabic, including the Emirati dialect.
 
-- `/app`: Core application code
-  - `/admin`: Admin interface
-  - `/core`: Core functionality
-  - `/face_recognition`: Face recognition system
-  - `/hardware`: Hardware interfaces
-  - `/integrations`: External integrations
-  - `/nlp`: Natural language processing
-  - `/speech`: Speech processing
-- `/config`: Configuration files
-- `/data`: Data storage
-  - `/audio`: Audio recordings
-  - `/faces`: Face images and encodings
-  - `/images`: Captured images
-  - `/logs`: System logs
-  - `/videos`: Recorded videos
-- `/scripts`: Utility scripts
+Natural Language Processing – Understands queries and generates useful responses (most of the time).
 
-### Key Components
+Appointment Scheduling – Handles meeting requests so humans don’t have to.
 
-- **State Machine**: Manages conversation flow and system states
-- **PIR Sensor**: Detects motion to activate the system
-- **Camera**: Captures images and videos for face recognition
-- **Audio System**: Handles speech input and output
-- **Face Recognizer**: Identifies people from images
-- **NLP Engine**: Processes text to understand intent and generate responses
-- **Email Service**: Sends notifications and alerts
+Email Notifications – Sends alerts for important events and system status updates.
 
-## License
+Modular Architecture – Designed for easy customization and future expansions.
 
-This project is licensed under a Proprietary License - see the LICENSE file for details.
-Commercial use, reselling, or redistribution is prohibited without explicit permission and royalty agreements.
 
-## Contact
+Minimum Hardware Requirements
 
-For more information or to inquire about licensing please contact:
-- Email: badr.receptionist@gmail.com
+Raspberry Pi 4B
+
+Raspberry Pi Camera Module 3 Noir
+
+USB PnP Audio Device (microphone and speaker)
+
+PIR Sensor (for motion detection)
+
+
+System Architecture
+
+Directory Structure
+
+/app – Core application code
+
+/admin – Admin interface
+
+/core – Core functionality
+
+/face_recognition – Face recognition system
+
+/hardware – Hardware interfaces
+
+/integrations – External integrations
+
+/nlp – Natural language processing
+
+/speech – Speech processing
+
+
+/config – Configuration files
+
+/data – Data storage
+
+/audio – Audio recordings
+
+/faces – Face images and encodings
+
+/images – Captured images
+
+/logs – System logs
+
+/videos – Recorded videos
+
+
+/scripts – Utility scripts
+
+
+Key Components
+
+State Machine – Manages conversation flow and system states.
+
+PIR Sensor – Detects motion to activate the system.
+
+Camera – Captures images and videos for face recognition.
+
+Audio System – Handles speech input and output.
+
+Face Recognizer – Identifies people from images.
+
+NLP Engine – Processes text to understand intent and generate responses.
+
+Email Service – Sends notifications and alerts.
+
+
+License
+
+This project is licensed under a Proprietary License – see the LICENSE file for details.
+Commercial use, reselling, or redistribution is strictly prohibited without explicit permission and royalty agreements.
+
+Contact
+
+For inquiries, licensing, or partnerships, please reach out:
+📧 Email: info.cognitara@gmail.com
+
 
 ---
 
-Powered by Cognitara (c) 2025
+Powered by Cognitara © 2025
+
+
