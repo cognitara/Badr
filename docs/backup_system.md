@@ -4,12 +4,12 @@ This document provides comprehensive information about the backup system impleme
 
 ## Overview
 
-The backup system provides two types of backups:
+The backup system provides multiple types of backups:
 
 1. **Local Backups**: Daily backups stored on the local machine
 2. **Google Drive Backups**: Weekly backups stored in Google Drive
-
-Both backup types create compressed archives (.tar.gz) of the entire Badr AI project directory.
+3. **Distributed Backups**: Synchronized backups between Pi 4 and Pi 5 (when using distributed architecture)
+4. **Video Storage Management**: Tiered storage system for video recordings
 
 ## Backup Scripts
 
@@ -73,6 +73,96 @@ Sets up automated backup schedule using cron.
 ./scripts/setup_backup_cron.sh
 ```
 
+### 6. sync_pi5.sh
+
+Synchronizes critical data between Pi 4 and Pi 5 in the distributed architecture.
+
+- **Frequency**: Hourly (when scheduled)
+- **Log File**: `/home/pi/sync_pi5.log`
+
+**Manual Execution**:
+```bash
+./scripts/sync_pi5.sh
+```
+
+### 7. manage_videos.sh
+
+Manages video storage according to the tiered storage policy.
+
+- **Frequency**: Daily at 4:00 AM (when scheduled)
+- **Log File**: `/home/pi/manage_videos.log`
+
+**Manual Execution**:
+```bash
+./scripts/manage_videos.sh
+```
+
+## Video Storage Management
+
+The system implements a tiered storage policy for video recordings:
+
+```mermaid
+flowchart TD
+    A[New Video Recorded] --> B[Stored on Pi 4]
+    B --> C{Age > 2 days?}
+    C -->|No| D[Keep on Pi 4]
+    C -->|Yes| E[Move to Pi 5 SSD]
+    E --> F{Age > 5 days?}
+    F -->|No| G[Keep on Pi 5 SSD]
+    F -->|Yes| H[Send Notification]
+    H --> I{Age > 7 days?}
+    I -->|No| J[Keep on Pi 5 SSD]
+    I -->|Yes| K[Archive or Delete]
+```
+
+### Tiered Storage Policy
+
+1. **Tier 1 (0-2 days)**: Videos stored on Pi 4 local storage
+   - Immediately accessible for recent interactions
+   - Automatically tagged with metadata (date, time, recognized faces)
+
+2. **Tier 2 (3-7 days)**: Videos moved to Pi 5 SSD
+   - More efficient long-term storage
+   - Indexed for quick retrieval
+   - Notification sent on day 5 with video count and size
+
+3. **Tier 3 (After 7 days)**:
+   - Videos are either archived to Google Drive or deleted based on configuration
+   - Metadata is retained for analytics purposes
+
+### Video Management Features
+
+- **Automatic Cleanup**: Prevents storage from filling up
+- **Selective Retention**: Important videos can be flagged for extended retention
+- **Metadata Preservation**: Even when videos are deleted, metadata is retained for analytics
+- **Compression**: Older videos are compressed to save space
+
+## Distributed Backup System
+
+When using the distributed architecture with Pi 4 and Pi 5, the backup system is enhanced:
+
+### Pi 4 Backup Components
+
+- Configuration files
+- Face recognition data
+- System logs
+- Recent video recordings (0-2 days)
+
+### Pi 5 Backup Components
+
+- Database
+- Analytics data
+- Older video recordings (3+ days)
+- Machine learning models
+
+### Synchronization Process
+
+The system maintains synchronization between devices:
+
+1. **Critical Data Sync**: Configuration and state information is synchronized hourly
+2. **Database Backup**: The Pi 5 database is backed up to Pi 4 daily
+3. **Failover Preparation**: Essential files for failover operation are kept updated on both devices
+
 ## Initial Setup
 
 ### 1. Google Drive Setup
@@ -115,6 +205,8 @@ This will set up the following schedule:
 - Local backup: Daily at 1:00 AM
 - Google Drive backup: Weekly on Sunday at 2:00 AM
 - Backup verification: Daily at 3:00 AM
+- Video management: Daily at 4:00 AM
+- Pi 5 synchronization: Hourly (if distributed architecture is enabled)
 
 ## Backup Restoration
 
@@ -143,6 +235,25 @@ This will set up the following schedule:
    tar -xzf /tmp/badr_backup_YYYYMMDD_HHMMSS.tar.gz -C /path/to/restore
    ```
 
+### Restoring a Distributed System
+
+When restoring a distributed system:
+
+1. Restore the Pi 4 (Controller) first:
+   ```bash
+   ./scripts/restore_pi4.sh /path/to/backup/file.tar.gz
+   ```
+
+2. Restore the Pi 5 (Processor):
+   ```bash
+   ./scripts/restore_pi5.sh /path/to/backup/file.tar.gz
+   ```
+
+3. Verify the connection between devices:
+   ```bash
+   ./scripts/verify_distributed.sh
+   ```
+
 ## Troubleshooting
 
 ### Local Backup Issues
@@ -157,6 +268,19 @@ This will set up the following schedule:
 - Test rclone connection: `rclone lsd badr_gdrive:`
 - Check backup log: `cat /home/pi/gdrive_backup.log`
 - Verify internet connection: `ping -c 4 google.com`
+
+### Distributed Backup Issues
+
+- Check Pi 5 connectivity: `ping -c 4 <PI5_IP>`
+- Check synchronization log: `cat /home/pi/sync_pi5.log`
+- Verify SSH key authentication: `ssh -i ~/.ssh/id_rsa_pi5 <PI5_USER>@<PI5_IP> echo "Connected"`
+- Check disk space on Pi 5: `ssh <PI5_USER>@<PI5_IP> df -h`
+
+### Video Storage Issues
+
+- Check video management log: `cat /home/pi/manage_videos.log`
+- Verify video directory structure: `ls -la /home/pi/Badr/data/videos/`
+- Check video metadata database: `sqlite3 /home/pi/Badr/data/video_metadata.db .tables`
 
 ### Cron Job Issues
 

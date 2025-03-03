@@ -2,13 +2,16 @@
 
 This document provides information about the Cline enhancements implemented for the Badr AI Receptionist project. These enhancements improve cross-platform consistency, error reduction, and extend Cline's capabilities through MCP servers.
 
+> **Note:** Cline is an AI assistant created by [Anthropic](https://www.anthropic.com/). This document describes custom enhancements implemented for the Badr AI Receptionist project to extend Cline's capabilities.
+
 ## Table of Contents
 
 1. [Cross-Platform Consistency](#cross-platform-consistency)
 2. [Error Reduction & Code Validation](#error-reduction--code-validation)
 3. [MCP Extensions](#mcp-extensions)
-4. [Setup Instructions](#setup-instructions)
-5. [Usage Guide](#usage-guide)
+4. [Distributed Architecture Support](#distributed-architecture-support)
+5. [Setup Instructions](#setup-instructions)
+6. [Usage Guide](#usage-guide)
 
 ## Cross-Platform Consistency
 
@@ -26,6 +29,22 @@ A comprehensive `.clinerules` file has been created in the project root director
 - Reasoning and validation processes
 
 The `.clinerules` file ensures that Cline follows the same rules and guidelines regardless of which device you're using.
+
+```mermaid
+flowchart TD
+    A[Developer opens project] --> B[VS Code loads .clinerules]
+    B --> C[Cline reads project-specific guidelines]
+    C --> D[Cline applies guidelines to all interactions]
+    D --> E[Consistent behavior across devices]
+    
+    subgraph ".clinerules Contents"
+    F[Project Context] --> G[Coding Standards]
+    G --> H[Error Handling]
+    H --> I[Workflow Guidelines]
+    I --> J[Component Guidelines]
+    J --> K[Validation Processes]
+    end
+```
 
 ### VS Code Settings
 
@@ -72,11 +91,17 @@ The `.clinerules` file includes enhanced validation rules that require Cline to:
 
 Cline is instructed to follow a self-review process after writing code:
 
-- Review for logical errors
-- Check for edge cases
-- Verify error handling
-- Ensure documentation is complete
-- Confirm tests are comprehensive
+```mermaid
+flowchart LR
+    A[Write Code] --> B[Review for Logical Errors]
+    B --> C[Check Edge Cases]
+    C --> D[Verify Error Handling]
+    D --> E[Ensure Documentation]
+    E --> F[Confirm Test Coverage]
+    F --> G[Final Code]
+```
+
+This systematic review process helps catch issues before they make it into the codebase, resulting in higher quality code with fewer bugs.
 
 ### Testing Framework
 
@@ -93,6 +118,26 @@ The testing framework is configured in `pytest.ini` and includes test fixtures i
 
 Model Context Protocol (MCP) servers have been implemented to extend Cline's capabilities:
 
+```mermaid
+flowchart TD
+    A[Cline] <--> B[MCP Server Manager]
+    B <--> C[Python Documentation MCP]
+    B <--> D[Hardware Testing MCP]
+    B <--> E[Distributed System MCP]
+    
+    C --> F[search_python_docs]
+    C --> G[get_library_docs]
+    
+    D --> H[test_camera]
+    D --> I[test_pir_sensor]
+    D --> J[test_audio]
+    D --> K[get_system_info]
+    
+    E --> L[monitor_distributed_system]
+    E --> M[check_pi5_connection]
+    E --> N[sync_configurations]
+```
+
 ### Python Documentation MCP
 
 This MCP server allows Cline to search Python documentation and get information about Python libraries. It provides two tools:
@@ -108,6 +153,29 @@ This MCP server allows Cline to test and interact with Raspberry Pi hardware. It
 - `test_pir_sensor`: Test the PIR motion sensor
 - `test_audio`: Test the audio device
 - `get_system_info`: Get Raspberry Pi system information
+
+### Distributed System MCP
+
+This new MCP server enables Cline to interact with the distributed architecture of Badr AI Receptionist. It provides tools for:
+
+- `monitor_distributed_system`: Check the health of both Pi 4 and Pi 5
+- `check_pi5_connection`: Verify connectivity with the Pi 5
+- `sync_configurations`: Ensure configurations are synchronized between devices
+
+## Distributed Architecture Support
+
+Cline has been enhanced to support the distributed architecture of Badr AI Receptionist, which uses Raspberry Pi 4 and Raspberry Pi 5 devices:
+
+- **Pi 4 (Controller)**: Handles hardware interfaces, motion detection, camera capture, audio I/O
+- **Pi 5 (Processor)**: Handles computationally intensive tasks like face recognition, NLP, speech processing
+
+Cline can now:
+
+- Generate code that works across the distributed architecture
+- Understand the component distribution between devices
+- Implement appropriate communication mechanisms
+- Provide guidance on system management and fail-safes
+- Help with troubleshooting distributed system issues
 
 ## Setup Instructions
 
@@ -139,7 +207,7 @@ chmod +x scripts/setup_mcp_servers.sh
 ./scripts/setup_mcp_servers.sh
 ```
 
-This will set up the Python Documentation and Hardware Testing MCP servers and configure Cline to use them.
+This will set up the Python Documentation, Hardware Testing, and Distributed System MCP servers and configure Cline to use them.
 
 ### 3. Testing Framework
 
@@ -187,6 +255,8 @@ Once the MCP servers are set up, you can use them in Cline by asking questions l
 - "Get documentation for the 'numpy' library"
 - "Test the Raspberry Pi camera"
 - "Get system information for the Raspberry Pi"
+- "Check the connection to the Pi 5"
+- "Monitor the distributed system health"
 
 ### Using the Testing Framework
 
