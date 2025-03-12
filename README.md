@@ -15,19 +15,20 @@ Badr is a repurposed medical simulation robot that has traded its stethoscope fo
 
 - **Bilingual Voice Interaction** – Supports both English and Arabic with improved microphone sensitivity
 - **ChatGPT Integration** – Uses advanced AI for natural conversations with a touch of humor
-- **Face Recognition & Registration** – Identifies team members and can register new visitors
-- **Photo Capture** – Takes photos on request and can send them via email
-- **Motion Detection** – Knows when someone arrives (no need to wave awkwardly)
 - **Natural Language Processing** – Understands queries and generates useful responses
 - **Appointment Scheduling** – Handles meeting requests so humans don't have to
 - **Email Notifications** – Sends alerts for important events and system status updates
 - **Modular Architecture** – Designed for easy customization and future expansions
 - **Distributed Processing** – Supports distributed architecture across multiple Raspberry Pi devices
-- **Video Recording** – Records interactions for security and training purposes
+
 - **System Management** – Monitors system health and manages resources efficiently
 
 ## Future Upgrades:
 
+- **Video Recording** – Records interactions for security and training purposes
+- **Face Recognition & Registration** – Identifies team members and can register new visitors
+- **Photo Capture** – Takes photos on request and can send them via email
+- **Motion Detection** – Knows when someone arrives (no need to wave awkwardly)
 - **Speak in Emirati** – Will be custom trained to speak Emirati accent and dialogue
 - **Gesture Recognition** – Understand hand gestures for more intuitive interaction
 - **Multi-language Support** – Add more languages beyond English and Arabic
